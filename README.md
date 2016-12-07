@@ -1,2 +1,2 @@
-# ad-hoc-networking
-Final Paper for ELEN-E6950
+# Ad-Hoc Networking Paper
+Explore the considerations of number of end users to ad-hoc networking effectiveness
