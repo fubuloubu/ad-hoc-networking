@@ -27,10 +27,10 @@ class CellPhoneUser:
     # if user is destination, else re-transmit
     # if criteria is met
     def receive(self, msg):
-        if self.userID == msg.rcvr:
+        if self.userID == msg.rcvrID:
             msg.setReceiveTime()
             self.rcvdMsgs.append(msg)
-        elif self.userID != msg.xmtr:
+        elif self.userID not in msg.XmitList and msg.TTL > 0:
             # message has not reached it's dest
             self.reXmitStack.append(msg)
             if len(self.reXmitStack) > MAXSTACKLEN:
@@ -48,6 +48,7 @@ class CellPhoneUser:
         if len(self.reXmitStack) > 0:
             msg = self.reXmitStack.pop()
             msg.incrTransTime()
+            msg.addXmtr(self.userID)
             self.broadcast(msg)
             return 1 #message was sent
         return 0 #message was not sent

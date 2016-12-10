@@ -3,6 +3,8 @@ from itertools import permutations
 from user import CellPhoneUser
 from message import Message
 
+TIMETOLIVE = 10
+
 class UserRegistry:
     def __init__(self, userLocations, radius):
         self.numUsers = len(userLocations)
@@ -17,7 +19,7 @@ class UserRegistry:
         return "{} class:".format(self.__class__.__name__) + \
             "\n".join([u.__repr__() for u in self.userList])
     
-    # Send N messages from one 
+    # Send N messages from one
     # random user to another
     def sendMessages(self, step=0, numMsgs=0):
         
@@ -27,7 +29,7 @@ class UserRegistry:
         
         # Send out calls
         for x in xmtrList:
-            msg = Message(x.userID, step, self.numUsers)
+            msg = Message(x.userID, step, self.numUsers, TIMETOLIVE)
             self.msgList.append(msg)
             x.transmit(msg)
         
