@@ -29,6 +29,16 @@ endef
 		mv $@ ~/Downloads; \
 	fi;
 
+# This is to remove extra instructions from matplotlib2tikz
+tail_copy=tail -n +$(2) $(1) > $(shell basename $(1));
+
+.PHONY: copy_graphs
+copy_graphs:
+	@echo "  COPY graphs"
+	@$(foreach file,$(wildcard ../simulation/*graph.tex),$(call tail_copy,$(file),10))
+
+Final-Paper.pdf: copy_graphs
+
 # Clean rule to remove intermediates 
 # produced by LaTeX and relevant libraries
 .PHONY: clean
