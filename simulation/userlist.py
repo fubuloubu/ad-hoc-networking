@@ -44,8 +44,10 @@ def showUserGraph(userList):
     y = np.asarray(list(map(lambda u: u[1].y,           userList)))
     a = np.asarray(list(map(lambda u: np.pi * (u[2])**2,  userList)))
     colors = np.random.rand(len(x))
-
+    # Draw reception radius as lightly colored circles
     plt.scatter(x, y, s=a, c=colors, alpha=0.5)
+    # Draw small black dots in the middle to reprsent user location
+    plt.scatter(x, y, s=np.pi, c='k')
     plt.show()
 
 import argparse
