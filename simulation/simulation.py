@@ -3,12 +3,12 @@ from time import time
 from eprint import eprint
 
 # Setup and run experiment
-def runSimulation(numSteps, radius, userList, intensityRatio):
+def runSimulation(numSteps, intensityRatio, userList):
     # Instantiate user list helper class
     eprint("     Setting up user registry... ", end="")
     startTime = time()
     from userregistry import UserRegistry
-    ul = UserRegistry(userList, radius)
+    ul = UserRegistry(userList)
     eprint("complete ({:3.3f} sec)".format(time() - startTime))
     
     # Helper for obtaining gaussian distribution from intensity ratio
@@ -43,8 +43,6 @@ def runSimulation(numSteps, radius, userList, intensityRatio):
 import argparse
 # Can be used elsewhere to build
 def simArgBuild(parser):
-    parser.add_argument('-R', '--radius', metavar='radius', type=float, default=10.0,
-        choices=[Range(1,1000)], help='Broadcast radius [feet]')
     parser.add_argument('-T', '--steps', metavar='steps', type=int, default=10,
         choices=[Range(1,1000)], help='Number of steps in the simulation')
     parser.add_argument('-I', '--intensity-ratio', metavar='ratio', type=float, default=0.05,
@@ -53,9 +51,8 @@ def simArgBuild(parser):
 def simArgParse(args, userList):
     simulationArguments = {}
     simulationArguments['numSteps']         = args.steps
-    simulationArguments['radius']           = args.radius
-    simulationArguments['userList']    = userList
     simulationArguments['intensityRatio']   = args.intensity_ratio
+    simulationArguments['userList']         = userList
     
     return simulationArguments
 

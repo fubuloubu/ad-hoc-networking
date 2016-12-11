@@ -6,10 +6,10 @@ from message import Message
 TIMETOLIVE = 10
 
 class UserRegistry:
-    def __init__(self, userLocations, radius):
+    def __init__(self, userLocations):
         self.numUsers = len(userLocations)
         self.userList = [CellPhoneUser(uid, radius, location, self) \
-                            for (uid, location) in userLocations]
+                            for (uid, location, radius) in userLocations]
         # For statistics later
         self.msgList = []
         self.retransmissions = 0
