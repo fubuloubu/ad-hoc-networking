@@ -1,0 +1,5 @@
+# Our experimental userlists
+*.ul
+
+# matplotlib2tikz can only write to a file
+*.tex
