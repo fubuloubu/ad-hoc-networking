@@ -28,6 +28,9 @@
 	@echo "   GEN $@"
 	@./simulation_results_parser.py -t $^ > $@
 
+.PHONY: all-results
+all-results: $(patsubst %.ul,%.results,$(wildcard sims/*.ul))
+
 # Clean up simulation
 .PHONY: clean
 clean:
