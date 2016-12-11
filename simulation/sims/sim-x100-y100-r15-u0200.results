@@ -1,0 +1,35 @@
+
+Statistics:
+Total Messages: 22
+Succesfully Received Messages: 9
+Success Rate: 40.91%
+Number of Retransmissions: 171
+Average Latency: 16.89 [steps]
+
+Statistics:
+Total Messages: 42
+Succesfully Received Messages: 5
+Success Rate: 11.90%
+Number of Retransmissions: 171
+Average Latency: 15.20 [steps]
+
+Statistics:
+Total Messages: 63
+Succesfully Received Messages: 12
+Success Rate: 19.05%
+Number of Retransmissions: 190
+Average Latency: 12.67 [steps]
+
+Statistics:
+Total Messages: 143
+Succesfully Received Messages: 12
+Success Rate: 8.39%
+Number of Retransmissions: 190
+Average Latency: 7.92 [steps]
+
+Statistics:
+Total Messages: 194
+Succesfully Received Messages: 16
+Success Rate: 8.25%
+Number of Retransmissions: 171
+Average Latency: 8.31 [steps]
