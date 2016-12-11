@@ -40,8 +40,9 @@ class UserRegistry:
     
     def userStatistics(self):
         totalMsgs =  len(self.msgList)
-        successfulMsgs = filter(lambda m: m.recvTime is not None, self.msgList)
-        numSuccessfulMsgs = len(list(successfulMsgs))
+        # Using list here because we need to use it twice below
+        successfulMsgs = list(filter(lambda m: m.recvTime is not None, self.msgList))
+        numSuccessfulMsgs = len(successfulMsgs)
         
         successRate = 100*numSuccessfulMsgs/float(totalMsgs) if totalMsgs > 0 else 0
         avgLatency = sum(map(lambda m: m.transitTime, successfulMsgs))
