@@ -97,11 +97,14 @@ class SimulationMetrics(print_data_model.MetricContainer):
         data_list  = [item for sublist in metricData for item in sublist]
         
         # Create and append average metrics
+        # First transpose list of lists
         avgMetricData = map(lambda *a: list(a), *metricData)
+        # Then do average by summing and dividing by number of entries
         avgMetricData = map(lambda l: sum(l), avgMetricData)
         avgMetricData = map(lambda s: s/float(len(simStats)), avgMetricData)
         # NOTE: Using list here because below we need use subscripts
         avgMetricData = list(avgMetricData)
+        # Finally append all average metrics to list
         for i in range(len(metricNames)):
             metric_list.append("avg-{0}".format(metricNames[i]))
             title_list.append("Simulation Average {0} [{1}]".
