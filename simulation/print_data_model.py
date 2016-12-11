@@ -109,7 +109,7 @@ class MetricContainer(object):
 
     # Utility function to ensure two objects have the same metric names
     def check_metrics_match(self, another_instance):
-        return self.metrics.viewkeys() == another_instance.metrics.viewkeys()
+        return self.metrics.keys() == another_instance.metrics.keys()
 
     # Utility function to ensure two objects hae the same titles
     def check_titles_match(self, another_instance):
