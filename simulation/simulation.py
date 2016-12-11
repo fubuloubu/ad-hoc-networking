@@ -31,7 +31,7 @@ def runSimulation(numSteps, radius, userLocations, intensityRatio):
     # Complete re-transmissions
     postSteps = 1
     while (postSteps <= 10 and retransmissions > 0):
-        eprint("Step {:02d} trying retransmission... ".format(postSteps+numSteps), end="")
+        eprint("Step {:02d} Completing retransmit... ".format(postSteps+numSteps), end="")
         startTime = time()
         retransmissions = ul.sendMessages()
         eprint("complete ({:3.3f} sec)".format(time() - startTime))
