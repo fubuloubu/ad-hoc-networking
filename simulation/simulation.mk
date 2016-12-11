@@ -7,8 +7,7 @@
 # Print user graphs
 %-usergraph.tex: %.ul
 	@echo " GRAPH $^"
-	@./userlist.py -F $^ --print-usergraph
-	@mv output-graph.tex $@
+	@./userlist.py -F $^ --print-usergraph > $@
 
 # Run simulations
 # NOTE: if %.args file exist, run N simulations

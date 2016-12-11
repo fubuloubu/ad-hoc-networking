@@ -100,5 +100,16 @@ if __name__ == '__main__':
         if args.action == "show-ug":
             plt.show()
         elif args.action == "print-ug":
+            # Write to a temporary file, 
+            filename = "graph.tmp"
             from matplotlib2tikz import save as tikz_save
-            tikz_save('output-graph.tex')
+            tikz_save(filename)
+            # get the string from that file,
+            f = open(filename, 'r')
+            graph_data = f.read()
+            # remove the file,
+            f.close()
+            from os import remove as os_remove
+            os_remove(filename)
+            # then return the string
+            print(graph_data)
