@@ -1,5 +1,2 @@
-# Our experimental userlists
-*.ul
-
-# matplotlib2tikz can only write to a file
-*.tex
+# matplotlib2tikz can only write to a specific ile
+output-graph.tex
