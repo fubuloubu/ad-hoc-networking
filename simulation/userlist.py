@@ -33,6 +33,19 @@ def writeUserList(userList):
     
     return "\n".join([ writeUser(u) for u in userList ])
 
+#def writeUserGraph(userList):
+def showUserGraph(userList):
+    import matplotlib.pyplot as plt
+    import numpy as np
+    # Get locations
+    x = np.asarray(list(map(lambda u: u[1].x,           userList)))
+    y = np.asarray(list(map(lambda u: u[1].y,           userList)))
+    a = np.asarray(list(map(lambda u: np.pi * (50)**2,  userList)))
+    colors = np.random.rand(len(x))
+
+    plt.scatter(x, y, s=a, c=colors, alpha=0.5)
+    plt.show()
+
 import argparse
 from argLimitedFloat import Range
 def ulArgBuild(parser):
@@ -74,8 +87,9 @@ if __name__ == '__main__':
     parser.set_defaults(action="print-ul")
     
     args = parser.parse_args()
-    print(args)
     userList = ulArgParse(args)
 
     if args.action == "print-ul":
         print(writeUserList(userList))
+    elif args.action == "show-ug":
+        showUserGraph(userList)
