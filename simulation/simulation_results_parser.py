@@ -59,7 +59,7 @@ class SimulationMetrics(print_data_model.MetricContainer):
         simStats = filter(None, simStats)
         simStats = map(lambda s: s.rstrip().split('\n'), simStats)
         # Parse each raw metric line into a metric object
-        # NOTE: Using list here because below we need to use it again
+        # NOTE: Using list here because below we need to use it twice
         simStats = list(map(lambda s: list(map(lambda ms: extractMetrics(ms), s)), simStats))
         
         # Make sure metric names in each simulation line up
@@ -89,20 +89,22 @@ class SimulationMetrics(print_data_model.MetricContainer):
                 metric_list.append("{1}-{0:02d}".format(i+1, metricNames[j]))
                 title_list.append("Simulation {0} {1} [{2}]".
                         format(i+1, metricTitles[j], metricUnits[j]))
-        from ast import literal_eval
-        # Get data list by extracting value from metrics and flattening that list
-        # NOTE: Using list here because below we need to use it again
-        metricData = list(map(lambda s: [ m["value"] for m in s], simStats))
-        data_list  = [literal_eval(item) for sublist in metricData for item in sublist]
         
-        # Add average metrics
-        avgMetricData = map(lambda l: sum(map(literal_eval, l)), metricData)
-        avgMetricData = map(lambda avg: avg/float(len(simStats)), avgMetricData)
+        # Get data list by extracting value from metrics and flattening that list
+        from ast import literal_eval
+        # NOTE: Using list here because below we need to use it twice
+        metricData = list(map(lambda s: [ literal_eval(m["value"]) for m in s], simStats))
+        data_list  = [item for sublist in metricData for item in sublist]
+        
+        # Create and append average metrics
+        avgMetricData = map(lambda *a: list(a), *metricData)
+        avgMetricData = map(lambda l: sum(l), avgMetricData)
+        avgMetricData = map(lambda s: s/float(len(simStats)), avgMetricData)
         # NOTE: Using list here because below we need use subscripts
         avgMetricData = list(avgMetricData)
-        for i in range(len(simStats)):
+        for i in range(len(metricNames)):
             metric_list.append("avg-{0}".format(metricNames[i]))
-            title_list.append("Average Simulation {0} [{1}]".
+            title_list.append("Simulation Average {0} [{1}]".
                     format(metricTitles[i], metricUnits[i]))
             data_list.append(avgMetricData[i])
         
