@@ -35,9 +35,7 @@ def writeUserList(userList):
     
     return "\n".join([ writeUser(u) for u in userList ])
 
-#def writeUserGraph(userList):
-def showUserGraph(userList):
-    import matplotlib.pyplot as plt
+def genUserGraph(userList):
     import numpy as np
     # Get locations
     x = np.asarray(list(map(lambda u: u[1].x,           userList)))
@@ -48,7 +46,6 @@ def showUserGraph(userList):
     plt.scatter(x, y, s=a, c=colors, alpha=0.5)
     # Draw small black dots in the middle to reprsent user location
     plt.scatter(x, y, s=np.pi, c='k')
-    plt.show()
 
 import argparse
 from argLimitedFloat import Range
@@ -97,5 +94,11 @@ if __name__ == '__main__':
 
     if args.action == "print-ul":
         print(writeUserList(userList))
-    elif args.action == "show-ug":
-        showUserGraph(userList)
+    else: 
+        import matplotlib.pyplot as plt
+        genUserGraph(userList)
+        if args.action == "show-ug":
+            plt.show()
+        elif args.action == "print-ug":
+            from matplotlib2tikz import save as tikz_save
+            tikz_save('output-graph.tex')
