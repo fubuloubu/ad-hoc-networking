@@ -25,7 +25,7 @@ class CellPhoneUser:
     
     # Receive message from remote user and store
     # if user is destination, else re-transmit
-    # if criteria is met
+    # if criteria is met based on protocol
     def receive(self, msg):
         if self.userID == msg.rcvrID:
             msg.setReceiveTime()
@@ -35,10 +35,10 @@ class CellPhoneUser:
             self.reXmitStack.append(msg)
             if len(self.reXmitStack) > MAXSTACKLEN:
                 self.reXmitStack.pop(0)
-        #else: message was retransmitted back
+        #else: message was retransmitted back to us
         #   ignore
     
-    # Generate a message and transmit it
+    # Process and transmit provided message
     def transmit(self, msg):
         self.xmitMsgs.append(msg)
         self.broadcast(msg)
