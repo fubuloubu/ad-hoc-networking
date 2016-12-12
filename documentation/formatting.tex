@@ -66,6 +66,15 @@
 \usepackage{caption}
 \setlength{\belowcaptionskip}{10pt plus 5pt minus 0pt}
 
+\newmintedfile[simcode]{python}{
+fontfamily=tt,
+fontsize=\scriptsize,
+linenos=true,
+frame=leftline,
+framesep=2mm,
+breaklines=true,
+}
+
 % Needed to use \autoref with listings from minted
 \providecommand*{\listingautorefname}{Listing}
 % Command for referencing listings
