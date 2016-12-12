@@ -51,5 +51,6 @@ clean:
 	@rm -f *.blg
 	@rm -f *.bbl
 	@rm -f *.pyg
+	@rm -f *.toc
 	@rm -rf _minted-*
 	@rm -f *-graph.tex
