@@ -41,13 +41,4 @@ Final-Presentation.pdf: copy_graphs
 .PHONY: clean
 clean:
 	@echo " CLEAN documentation"
-	@rm -f *.pdf*
-	@rm -f *.log
-	@rm -f *.out
-	@rm -f *.aux
-	@rm -f *.blg
-	@rm -f *.bbl
-	@rm -f *.pyg
-	@rm -f *.toc
-	@rm -rf _minted-*
-	@rm -f *-graph.tex
+	@grep -v "#\|^\$$" .gitignore | while read line; do rm -rf $$line; done
