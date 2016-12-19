@@ -33,7 +33,7 @@ copy_graphs:
 	@echo "  COPY graphs"
 	@$(foreach file,$(wildcard ../simulation/*graph.tex),$(call tail_copy,$(file),10))
 
-Final-Paper.pdf: copy_graphs
+Final-Report.pdf: copy_graphs
 Final-Presentation.pdf: copy_graphs
 
 # Clean rule to remove intermediates 
