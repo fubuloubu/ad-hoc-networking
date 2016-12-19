@@ -12,5 +12,24 @@
 \usepgfplotslibrary{groupplots}
 \pgfplotsset{width=10cm,compat=1.7}
 \pgfplotsset{every axis legend/.append style={
-             at={(0,0)},
-                 anchor=north east}}
+                at={(0,0)},
+             anchor=north east}
+}
+
+%% Helper for processing tikz graphs
+\newcommand{\sidebysidegraphs}[6]{
+\begin{figure}
+    \resizebox{.5\linewidth}{!}{
+        \subfloat[#2]{
+            \input{#1}
+        }
+    }
+    \resizebox{.5\linewidth}{!}{
+        \subfloat[#4]{
+            \input{#3}
+        }
+    }
+    \caption{#5}
+    \label{#6}
+\end{figure}
+}
