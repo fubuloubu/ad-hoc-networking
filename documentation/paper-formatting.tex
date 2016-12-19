@@ -1,0 +1,34 @@
+%% Overall styling
+\documentclass[10pt,titlepage]{article}
+\usepackage[a5paper,margin=0.5in]{geometry}
+\usepackage[toc,page]{appendix}
+\input{setup-format.tex}
+\input{header-format.tex}
+
+%% Font
+\usepackage[sfdefault,light]{roboto}
+\fontsize{11}{14}
+
+%% URLs
+\usepackage[ocgcolorlinks]{hyperref}
+\urlstyle{same}
+\renewcommand\UrlFont{\color{blue}}
+
+%% Lists
+\usepackage[shortlabels]{enumitem}
+\input{fullwidth.tex}
+
+%% Code Listings
+\input{listings-format.tex}
+
+%% Graphs and Tables
+\input{graphs-format.tex}
+\input{tables-format.tex}
+% Non-floating Captions
+\usepackage{capt-of}
+
+%% Maths
+\usepackage{amsmath}
+
+%% Patches (because this distro has an old version of LaTeX
+\usepackage{fixltx2e}

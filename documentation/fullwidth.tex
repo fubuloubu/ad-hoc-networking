@@ -1,0 +1,10 @@
+% Create environment that allows full-width text within list
+\makeatletter
+\newenvironment{fullwidth}
+{\par%
+    \setlength{\@totalleftmargin}{0pt}%
+    \setlength{\linewidth}{\hsize}%
+    \list{}{\setlength{\leftmargin}{0pt}}
+\item\relax}
+    {\endlist}
+    \makeatother

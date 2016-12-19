@@ -1,0 +1,49 @@
+% Float row is done so that listings applied
+% in order to display listing title above listing
+\usepackage{floatrow}
+\floatsetup[listing]{style=Plaintop}
+
+%% Code listings
+\usepackage{minted}
+\usepackage{listings}
+\usepackage{color} % for colored solution
+\usepackage{caption}
+\setlength{\belowcaptionskip}{10pt plus 5pt minus 0pt}
+
+\newmintedfile[simcode]{python}{
+fontfamily=tt,
+fontsize=\scriptsize,
+linenos=true,
+frame=leftline,
+framesep=2mm,
+breaklines=true,
+}
+
+% Needed to use \autoref with listings from minted
+\providecommand*{\listingautorefname}{Listing}
+% Command for referencing listings
+\newcommand*{\listingref}[1]{\specialcell[r]{\nameref*{#1} \\ Source Code: \hyperref[{#1}]{\autoref*{#1}}}}
+
+% This will allow us to use file names with
+% underscores in below
+\AtBeginDocument{
+    \catcode`_=12
+    \begingroup\lccode`~=`_
+    \lowercase{\endgroup\let~}\sb
+    \mathcode`_="8000
+}
+
+% Inline quick macros
+\newmintinline[cpp]{cpp}{}
+\newmintinline[ansic]{c}{}
+
+% Custom macro for code listings from files
+% #1 - language e.g. ocaml
+% #2 - filename e.g. ../src/vislang.ml
+% #3 - label e.g. src/top
+% #4 - description e.g. Top Level
+% note: filename will be pretty printed as vislang/src/*
+%       instead of ../src/*
+\newcommand{\srccode}[2]{
+    \inputminted[linenos,fontsize=\footnotesize,frame=single,label=#2]{#1}{#2}
+}

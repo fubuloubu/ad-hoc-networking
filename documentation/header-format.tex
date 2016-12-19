@@ -1,0 +1,15 @@
+%% Header
+\usepackage{fancyhdr,lastpage}
+\usepackage[mmddyyyy]{datetime}
+\renewcommand{\dateseparator}{/}
+\fancypagestyle{plain}{
+    \fancyhf{} %Clear Everything.
+    \lhead{ \authorship }
+    \chead{ \class }
+    \rhead{ \jobname\ Page \thepage\ of \pageref*{LastPage} }
+    \setlength{\headheight}{30pt}
+    \setlength{\footskip}{24pt}
+    \renewcommand{\headrulewidth}{1pt} %0pt for no rule, 2pt thicker etc...
+    \renewcommand{\footrulewidth}{0pt}
+}
+\pagestyle{plain}
