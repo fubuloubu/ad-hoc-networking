@@ -10,5 +10,9 @@
 *.toc
 _minted-*/
 
+# Beamer
+*.nav
+*.snm
+
 # Copied from simulation results
 *-graph.tex
