@@ -1,2 +1,14 @@
+# Ignore LaTeX intermediates
+*.pdf*
+*.pyg
+*.log
+*.bbl
+*.blg
+*.out
+*.aux
+*.png
+*.toc
+_minted-*/
+
 # Copied from simulation results
 *-graph.tex

@@ -1,15 +1,3 @@
-# Ignore LaTeX intermediates
-*.pdf*
-*.pyg
-*.log
-*.bbl
-*.blg
-*.out
-*.aux
-*.png
-*.toc
-_minted-*/
-
 # Ignore vim backups files
 *.swp
 

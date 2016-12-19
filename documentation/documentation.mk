@@ -24,10 +24,6 @@ endef
 		); \
 	fi
 	@$(call RUN_PDFLATEX)
-	@if [ -d "$$(readlink -f ~/Downloads)" ]; then \
-		echo "  MOVE $@"; \
-		mv $@ ~/Downloads; \
-	fi;
 
 # This is to remove extra instructions from matplotlib2tikz
 tail_copy=tail -n +$(2) $(1) > $(shell basename $(1));
