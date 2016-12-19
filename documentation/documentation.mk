@@ -34,6 +34,7 @@ copy_graphs:
 	@$(foreach file,$(wildcard ../simulation/*graph.tex),$(call tail_copy,$(file),10))
 
 Final-Paper.pdf: copy_graphs
+Final-Presentation.pdf: copy_graphs
 
 # Clean rule to remove intermediates 
 # produced by LaTeX and relevant libraries
