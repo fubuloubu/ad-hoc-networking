@@ -102,8 +102,9 @@ if __name__ == '__main__':
         if args.action == "show-ug":
             plt.show()
         elif args.action == "print-ug":
-            # Write to a temporary file, 
-            filename = "graph.tmp"
+            # Write to a temporary file,
+            import uuid
+            filename = "graph"+str(uuid.uuid4())+".tmp"
             from matplotlib2tikz import save as tikz_save
             tikz_save(filename)
             # get the string from that file,

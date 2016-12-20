@@ -258,7 +258,8 @@ def graph(datamodel, target_list, selected_metrics, name_replace_list):
     plt.legend(loc='lower right', bbox_to_anchor=(0.5, -0.05))
     
     # Write to a temporary file, 
-    filename = "graph.tmp"
+    import uuid
+    filename = "graph"+str(uuid.uuid4())+".tmp"
     tikz_save(filename)
     plt.close(fig)
     # get the string from that file,
