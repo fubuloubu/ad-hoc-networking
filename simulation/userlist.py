@@ -54,24 +54,24 @@ def ulArgBuild(parser):
         choices=[Range(10,1000)], help='The x-axis length M of the simulation grid')
     parser.add_argument('-y', metavar='N', type=int, default=100,
         choices=[Range(10,1000)], help='The y-axis length M of the simulation grid')
-    parser.add_argument('-R', '--radius', metavar='radius', type=float, default=10.0,
+    parser.add_argument('-r', '--radius', metavar='radius', type=float, default=10.0,
         choices=[Range(1,1000)], help='Broadcast radius [feet]')
-    group = parser.add_mutually_exclusive_group(required=True)
-    group.add_argument('-U', '--users', metavar='users', type=int, choices=[Range(10,10000)], 
-        help='The number of randomly generated users in the simulation')
-    group.add_argument('-F', '--import-userlist', metavar='filename', type=str,
+    group = parser.add_mutually_exclusive_group(required=False)
+    group.add_argument('-u', '--users', metavar='users', type=int, default=100,
+        choices=[Range(10,10000)], help='The number of randomly generated users in the simulation')
+    group.add_argument('-f', '--import-userlist', metavar='filename', type=str,
         help='A file containing a list of users in the simulation')
 
 def ulArgParse(args):
-    if args.users:
-        eprint("     Starting user generation... ", end="")
-        startTime = time()
-        userLocations = generateUserList(args)
-        eprint("complete ({:3.3f} sec)".format(time() - startTime))
-    elif args.import_userlist:
+    if args.import_userlist:
         eprint("     Starting userlist import... ", end="")
         startTime = time()
         userLocations = readUserList(args.import_userlist)
+        eprint("complete ({:3.3f} sec)".format(time() - startTime))
+    elif args.users:
+        eprint("     Starting user generation... ", end="")
+        startTime = time()
+        userLocations = generateUserList(args)
         eprint("complete ({:3.3f} sec)".format(time() - startTime))
 
     return userLocations
