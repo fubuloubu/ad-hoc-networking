@@ -43,9 +43,9 @@ def runSimulation(numSteps, intensityRatio, userList):
 import argparse
 # Can be used elsewhere to build
 def simArgBuild(parser):
-    parser.add_argument('-T', '--steps', metavar='steps', type=int, default=10,
+    parser.add_argument('-t', '--steps', metavar='steps', type=int, default=10,
         choices=[Range(1,1000)], help='Number of steps in the simulation')
-    parser.add_argument('-I', '--intensity-ratio', metavar='ratio', type=float, default=0.05,
+    parser.add_argument('-i', '--intensity-ratio', metavar='ratio', type=float, default=0.05,
         choices=[Range(0.001,0.1)], help='Average ratio of users that transmit every step')
     
 def simArgParse(args, userList):
