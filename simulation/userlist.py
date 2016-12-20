@@ -57,7 +57,7 @@ def ulArgBuild(parser):
     parser.add_argument('-r', '--radius', metavar='radius', type=float, default=10.0,
         choices=[Range(1,1000)], help='Broadcast radius [feet]')
     group = parser.add_mutually_exclusive_group(required=False)
-    group.add_argument('-u', '--users', metavar='users', type=int, default=100,
+    group.add_argument('-u', '--users', metavar='users', type=int,
         choices=[Range(10,10000)], help='The number of randomly generated users in the simulation')
     group.add_argument('-f', '--import-userlist', metavar='filename', type=str,
         help='A file containing a list of users in the simulation')
@@ -68,7 +68,9 @@ def ulArgParse(args):
         startTime = time()
         userLocations = readUserList(args.import_userlist)
         eprint("complete ({:3.3f} sec)".format(time() - startTime))
-    elif args.users:
+    else:
+        if not args.users:
+            args.users = 100 #default value for this
         eprint("     Starting user generation... ", end="")
         startTime = time()
         userLocations = generateUserList(args)
