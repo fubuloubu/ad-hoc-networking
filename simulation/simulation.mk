@@ -77,10 +77,58 @@ varI_RESULTS=$(subst .ul,.results,$(varI_USERLISTS))
 .PHONY: all-results
 all-results: $(subst .ul,.results,$(ALL_USERLISTS))
 
+# Process results
+# (FOR DEBUG ONLY)
+%-results.tex: %.results
+	@echo "   GEN $@"
+	@./simulation_results_parser.py -t $^ >$@
+
+# Helper to get middle part of a filename, which will contain metric to graph
+GET_METRIC=$(shell echo $(1) | sed "s/[[:lower:]]*-\(.*\)-$(2).tex/\1/")
+
+%-graph.tex:
+	@echo "   GEN $@"
+	@./simulation_results_parser.py \
+		-m avg-$(call GET_METRIC,$@,graph) \
+		-r \
+		sims/sim "" \
+		.results "" \
+		+x "" \
+		+y x \
+		+r "" \
+		+u "" \
+		-g $^ >$@
+
+varA_GRAPHS=vararea-average-latency-graph.tex vararea-success-rate-graph.tex
+$(varA_GRAPHS): $(varA_RESULTS)
+varR_GRAPHS=varradius-average-latency-graph.tex varradius-success-rate-graph.tex
+$(varR_GRAPHS): $(varR_RESULTS)
+varU_GRAPHS=varusers-average-latency-graph.tex varusers-success-rate-graph.tex
+$(varU_GRAPHS): $(varU_RESULTS)
+
+# Handle this one separately because of metric location
+varI_TABLES=varintensity-average-latency-table.tex varintensity-success-rate-table.tex
+$(varI_TABLES): $(varI_RESULTS)
+	@echo "   GEN $@"
+	@./simulation_results_parser.py \
+		-m $(call GET_METRIC,$@,table)-[0-9]* \
+		-f latex \
+		-t $^ >$@
+
+ALL_ITEMS=$(varA_GRAPHS) $(varR_GRAPHS) $(varU_GRAPHS) $(varI_TABLES)
+
+.PHONY: all
+all: $(ALL_ITEMS) $(SIMDIR)/$(SIMPREFIX)-usergraph.tex
+	@# Move this at the end so documentation can copy all at once
+	@echo "  MOVE $(SIMPREFIX)-usergraph.tex"
+	@mv $(SIMDIR)/$(SIMPREFIX)-usergraph.tex $(SIMPREFIX)-usergraph.tex
+
 # Clean up simulation
 .PHONY: clean
 clean:
 	@echo " CLEAN simulation"
 	@rm -rf __pycache__
 	@rm -f *.pyc
+	@rm -f  $(ALL_ITEMS)
+	@rm -f  $(SIMPREFIX)-usergraph.tex
 	@rm -rf $(SIMDIR)
