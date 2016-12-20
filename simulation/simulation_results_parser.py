@@ -87,7 +87,7 @@ class SimulationMetrics(print_data_model.MetricContainer):
         for i in range(len(simStats)):
             for j in range(len(metricNames)):
                 metric_list.append("{1}-{0:02d}".format(i+1, metricNames[j]))
-                title_list.append("Simulation {0} {1} [{2}]".
+                title_list.append("Simulation {0} {1}".
                         format(i+1, metricTitles[j], metricUnits[j]))
         
         # Get data list by extracting value from metrics and flattening that list
@@ -107,7 +107,7 @@ class SimulationMetrics(print_data_model.MetricContainer):
         # Finally append all average metrics to list
         for i in range(len(metricNames)):
             metric_list.append("avg-{0}".format(metricNames[i]))
-            title_list.append("Simulation Average {0} [{1}]".
+            title_list.append("Simulation Average {0}".
                     format(metricTitles[i], metricUnits[i]))
             data_list.append(avgMetricData[i])
         
