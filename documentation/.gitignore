@@ -16,3 +16,5 @@ _minted-*/
 
 # Copied from simulation results
 *-graph.tex
+*-table.tex
+sim-usergraph.tex
