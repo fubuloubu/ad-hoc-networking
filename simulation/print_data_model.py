@@ -37,7 +37,7 @@ class MetricContainer(object):
 
     # Utility function to return all matching metric names
     def get_matching_names(self, match):
-        return [s for s in self.get_metric_names() if re.search(match, s) is not None]
+        return sorted([s for s in self.get_metric_names() if re.search(match, s) is not None])
     
     # Return a metric object of a certain name
     def get_metric(self, metric_name):
