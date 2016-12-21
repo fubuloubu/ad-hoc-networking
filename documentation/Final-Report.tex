@@ -5,8 +5,9 @@
 
 \input{format/paper-formatting.tex}
 
+
 \begin{document}
-    \maketitle
+    \input{titlepage.tex}
 
     \pagebreak
     \tableofcontents
@@ -14,26 +15,24 @@
     \pagebreak
     \input{abstract.tex}
     
-    \pagebreak
     \input{background.tex}
     
-    \pagebreak
     \input{methodology.tex}
     
-    \pagebreak
     \input{results.tex}
     
-    \pagebreak
     \input{conclusion.tex}
 
     \pagebreak
-    \appendix
+    \begin{appendices}
     \renewcommand{\thesection}{\Alph{section}}
     \input{listings.tex}
     
     \pagebreak
+    \appendix
     \small
-    \bibliography{bibliography.bib}{}
     \bibliographystyle{plain}
+    \bibliography{bibliography.bib}
+    \end{appendices}
 
 \end{document}

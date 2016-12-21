@@ -1,7 +1,6 @@
 %% Overall styling
 \documentclass[10pt,titlepage]{article}
 \usepackage[a5paper,margin=0.5in]{geometry}
-\usepackage[toc,page]{appendix}
 \input{format/setup-format.tex}
 \input{format/header-format.tex}
 
@@ -13,6 +12,10 @@
 \usepackage[ocgcolorlinks]{hyperref}
 \urlstyle{same}
 \renewcommand\UrlFont{\color{blue}}
+\hypersetup{%
+  colorlinks = true,
+  linkcolor  = black
+}
 
 %% Lists
 \usepackage[shortlabels]{enumitem}
@@ -32,3 +35,15 @@
 
 %% Patches (because this distro has an old version of LaTeX
 \usepackage{fixltx2e}
+
+%% Titled appendices
+\usepackage[titletoc,page]{appendix}
+
+%% Make Bibliography an Appendix
+\usepackage[english]{babel}
+\addto\captionsenglish{\renewcommand{\bibname}{References}}
+\makeatletter
+\newcommand*\bib@heading{%
+    \chapter{\bibname}%
+    \@mkboth{\MakeMarkcase{\bibname}}{\MakeMarkcase{\bibname}}}%
+\makeatother
