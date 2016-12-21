@@ -9,11 +9,21 @@ The simulation was developed in several compontents.
 The first stage of the simulation is the map creation layer,
 which places N users (ceullar devices) randomly on an \textit{n x m} map at a
 given (x, y) coordinate with a given starting radius (communication range).
-The stage is able to instaniated for a new simulation dynamically, or additional
-methods exist to process files containing generated lists of users so that
-statically determined arrangements can be tried.
+The map creation stage can be instaniated for a new simulation dynamically, 
+but additional methods exist to process files containing generated lists of 
+users so that statically determined arrangements can be tried.
 This layer was leveraged to create several static lists of different quantity
 and arrangements of users, which were used for analysis by the main simulation.
+Figure \ref{fig:usergraph} is an example userlist generated for the Intensity Ratio simulation.
+Each user is modeled as a black point with the radius of the user colored in
+for visualization purposes.
+\par
+\begin{figure}
+    \input{sim-usergraph.tex}
+    \caption{User graph for 100 Users Randomly placed on a 100x100 grid}
+    \label{fig:usergraph}
+\end{figure}
+\par
 
 The second stage was the main simulation.
 This stage took a list of users, as described previously, as well as additional
