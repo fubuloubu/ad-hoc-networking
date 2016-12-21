@@ -76,7 +76,7 @@ def ulArgParse(args):
         eprint("complete ({:3.3f} sec)".format(time() - startTime))
     else:
         if not args.users:
-            args.users = 100 #default value for this
+            args.users = 200 #default value for this
         eprint("     Starting user generation... ", end="")
         startTime = time()
         userLocations = generateUserList(args)
