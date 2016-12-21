@@ -214,7 +214,7 @@ def create_table(datamodel, target_list, fmt, selected_metrics, name_replace_lis
     hdrs = data.pop(0)
     return tabulate(data, tablefmt=fmt, numalign="None", headers=hdrs)
 
-def graph(datamodel, target_list, selected_metrics, name_replace_list):
+def graph(datamodel, target_list, selected_metrics, name_replace_list, x_axis):
     
     xdata = []
     ydata = []
@@ -248,18 +248,31 @@ def graph(datamodel, target_list, selected_metrics, name_replace_list):
     ydata = transpose(ydata)
     # Create graph
     fig = plt.figure()
-
-    # Set temporary x-axis to text xdata
-    try:
-        x = list(map(float, xdata))
-    except ValueError:
-        x = range(len(xdata))
-    plt.xticks(x, xdata)
+    # If x-axis provided, user wants to graph
+    # all metrics from a single file against this 
+    # x-axis
+    if x_axis:
+        if len(ydata[0]) != 1:
+            raise IOError('''
+    Can only pass 1 file when this option is chosen
+    ''')
+        x = x_axis
+        y = [[i[0] for i in ydata]]
+        metric_labels = ["TODO: Figure out something"]
+    else:
+        # Set temporary x-axis to text xdata
+        try:
+            x = list(map(float, xdata))
+        except ValueError:
+            x = range(len(xdata))
+        y = ydata
+        metric_labels = metrics
+        plt.xticks(x, xdata)
     #Don't want legends
     #plt.legend(loc='lower right', bbox_to_anchor=(0.5, -0.05))
     
-    for i, metric in enumerate(metrics):
-        plt.plot(x, ydata[i], 'o-', lw=4.0, label=metric)
+    for i, metric in enumerate(metric_labels):
+        plt.plot(x, y[i], 'o-', lw=4.0, label=metric)
     
     # Write to a temporary file, 
     import uuid
@@ -292,6 +305,8 @@ def main(datamodel, example):
         help="Pair-ordered list of replacements to make in filenames\n" + \
             "e.g. FIND1 -> REPLACE1, FIND2 -> REPLACE2, etc.\n" + \
             "NOTE: use '+' char instead of '-' char")
+    ap.add_argument("-x", "--x-axis", nargs='+', type=float, default=None,
+        help="List of X-Axis values to match all metrics to for plotting.")
     g = ap.add_mutually_exclusive_group(required=True)
     g.add_argument("-t", "--tabulate", nargs='+', metavar='TARGET',
         help="Displays results data for each target in a table")
@@ -321,7 +336,7 @@ def main(datamodel, example):
         # First is assumed to be the baseline, Second is assumed to be the target
         print(compare(datamodel, args['compare'][0], args['compare'][1], args['format'], args['metrics'], name_replace_list))
     elif args['graph'] is not None:
-        print(graph(datamodel, args['graph'], args['metrics'], name_replace_list))
+        print(graph(datamodel, args['graph'], args['metrics'], name_replace_list, args["x_axis"]))
 
 if __name__ == '__main__':
     raise UsageError("Cannot be used by itself")
