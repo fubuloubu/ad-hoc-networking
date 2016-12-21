@@ -28,12 +28,13 @@ GET_SIM_ARGS_FROM_FILE=$(subst -, -,$(subst $(SIMPREFIX),,$(basename $(notdir $(
 	@./userlist.py -f $^ --print-usergraph >$@ $(IGNORE_WARNINGS)
 
 # Experiments
-varA= 10  12  15  20  25  30  40  50  60  80  100  120  160
-varR= 10  12  15  20  25  30  40  50  60  80  100  120  160
-varU=100 120 150 200 250 300 400 500 600 800 1000 1200 1600
+SHELL:=/bin/bash
+varA=$(shell echo {10..160..5})
+varR=$(shell echo {10..160..5})
+varU=$(shell echo {100..1600..50})
 # This one must be handled separately
 # because it's not in the userlist
-varI=0.010 0.012 0.015 0.020 0.030 0.040 0.060 0.080 0.100
+varI=$(shell echo 0.{010..100..10})
 
 USERLIST_FILENAME=$(addsuffix .ul,$(addprefix $(SIMDIR)/$(SIMPREFIX),$(1)))
 varA_USERLISTS=$(foreach arg,$(varA),$(call USERLIST_FILENAME,-a$(arg)))
