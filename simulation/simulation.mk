@@ -77,6 +77,11 @@ varI_RESULTS=$(subst .ul,.results,$(varI_USERLISTS))
 .PHONY: all-results
 all-results: $(subst .ul,.results,$(ALL_USERLISTS))
 
+.PHONY: clean-results
+clean-results:
+	@echo " CLEAN results"
+	@rm -rf $(SIMDIR)
+
 # Process results
 # (FOR DEBUG ONLY)
 %-results.tex: %.results
@@ -123,12 +128,16 @@ all: $(ALL_ITEMS) $(SIMDIR)/$(SIMPREFIX)-usergraph.tex
 	@echo "  MOVE $(SIMPREFIX)-usergraph.tex"
 	@mv $(SIMDIR)/$(SIMPREFIX)-usergraph.tex $(SIMPREFIX)-usergraph.tex
 
+# Separate clean for removing buildable figures
+.PHONY: clean-figures
+clean-figures:
+	@echo " CLEAN figures"
+	@rm -f  $(ALL_ITEMS)
+	@rm -f  $(SIMPREFIX)-usergraph.tex
+
 # Clean up simulation
 .PHONY: clean
 clean:
 	@echo " CLEAN simulation"
 	@rm -rf __pycache__
 	@rm -f *.pyc
-	@rm -f  $(ALL_ITEMS)
-	@rm -f  $(SIMPREFIX)-usergraph.tex
-	@rm -rf $(SIMDIR)
