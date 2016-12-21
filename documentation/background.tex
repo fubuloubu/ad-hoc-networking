@@ -1,10 +1,58 @@
-\section{Introduction and Background}
+\section{Introduction}
+\subsection{Motivation}
 While many poor inhabitants of developing countries now own cellular devices in 2016, the cost
 of cellular network services is still prohibitive enough that many users don't use the services
 provided by these networks unless absolutely necessary.
 This has lead to primitive yet ingenious methods of communication devised by users to exchange 
 messages with each other by placing missed calls -- which do not incur charges -- in order to 
 reduce costs for themselves and their families \cite{beeping}.
-Mesh Networking has the ability to supplement the connections of users and allow them to freely 
-communicate with their friends and family over a coverage area of a small town
-%TODO: Work on this some more
+However ingenious, this clearly demonstrates one scenario where reliable Ad-Hoc Networking
+technologies are needed to supplement the connections of users and allow them to freely 
+communicate with their friends and family over a coverage area of a small town.
+
+Similar needs can be demonstrated when discussing communication during a protest,
+where a malevolent government may disrupt regular cellular communications to a crowd of people,
+or keeping in touch with a friends during a concert, where overuse of the existing 
+wireless infrastructure could lead to issues that ad-hoc networking can solve and prevent or 
+reduce possible emergencies in this situation.
+A recent example is the app Jott \cite{jott-techcrunch,jott-forbes}, which connects it's users
+using ad-hoc networking over the Wi-Fi protocol. In the interview, co-founder Jared Allgood
+discusses that technologies like this will be very in-demand in the future, as cellular 
+communication costs remain high but people still want to communicate with friends and family.
+
+While the need for this technology is very apparent over a wide range of possible scenarios,
+in reality there are a host of technical issues that are not well understood about the technology.
+Scaleability is one area of concern that has been studied in detail \cite{lee01}, as these
+technologies suffer from scaleability problems as the number of users grows larger.
+However, through my search of the literature, it doesn't appear that the effects of scaleability
+are studied as users get more spread out over an area such as in our first example.
+Therefore, it seemed pertinent to create a simulation framework that allows simulations through
+a wide variety of conditions, such that we may draw conclusions about these conditions in order
+to focus development of these technologies more towards these kinds of users.
+
+\subsection{Background}
+In order to create a simulation on this scale, it was necessary to make a few assumptions
+and further investigate the sorts of routing protocols developed for this purpose.
+Our first assumption was to assume that all users are using homogeneous hardware and messages.
+This means that we could assume that all users had the same transmission strength (or radius),
+all messages could be represented simply by a reduced protocol, and that no other inconsistencies
+would have to be modeled for our user model.
+Secondly, we assumed that all users would be active at all times (available to send or receive
+messages), there would be no dynamic delays in processing, and there were no inherant delays in
+communication between any node.
+Lastly, we assumed that overall communication happened randomly in short, one-message bursts,
+such that overall communication of a single message could be measured simply as receipt of the
+individual packets.
+
+With the assumptions in place, we needed a transmission and routing protocol in order to produce
+message routing that accurately models the communications between nodes.
+Initially, the AODV algorithm \cite{perkins99,roter00} was studied for implementation into the
+usernode model, however due to time constraints the algorithm was simplified to a very simple
+stack-based broadcast retransmission model where each node attempts retransmissison of any
+messages it hears by storing those messages in a limited size storage stack.
+If a node exceeds it's retransmit stack, it pops the oldest message and appends the new message 
+onto the stack.
+The message itself stores the transmission list, so a user can avoid re-transmitting the same
+message and flooding the stack.
+While potentially unrealistic, this algorithm allowed the project to come up with accurate
+results similar to those obtained by a real implementation of AODV \cite{morshed08}.
