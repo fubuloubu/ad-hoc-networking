@@ -1,18 +1,18 @@
 \section{Methodology}
-The objective of the project was to produce a parameterized simulation 
+The objective of the project is to produce a parameterized simulation 
 that could represent an ad-hoc networking scenario and compare the effects 
 of different parameters on the overall communications system in terms of 
 per-user average success rate (succssfully received messages) 
 and latency of those messages.
 
-The simulation was developed in several compontents.
+The simulation is developed in several compontents.
 The first stage of the simulation is the map creation layer,
 which places N users (ceullar devices) randomly on an \textit{n x m} map at a
 given (x, y) coordinate with a given starting radius (communication range).
 The map creation stage can be instaniated for a new simulation dynamically, 
 but additional methods exist to process files containing generated lists of 
 users so that statically determined arrangements can be tried.
-This layer was leveraged to create several static lists of different quantity
+This layer is leveraged to create several static lists of different quantity
 and arrangements of users, which were used for analysis by the main simulation.
 Figure \ref{fig:usergraph} is an example userlist generated for the Intensity Ratio simulation.
 Each user is modeled as a black point with the radius of the user colored in
@@ -25,7 +25,7 @@ for visualization purposes.
 \end{figure}
 \par
 
-The second stage was the main simulation.
+The second stage is the main simulation.
 This stage took a list of users, as described previously, as well as additional
 parameters describing the nature of communication amoung the users such as
 the intensity ratio and the number of steps (as an analogue for time) to run 
@@ -33,19 +33,19 @@ the simulation for.
 At each stage of the simulation, a randomly chosen subset of all users on the map
 were chosen based upon the intensity ratio to attempt to send a message to another
 randomly chosen user on the map.
-After the number of steps specified was reached, the simulation would continue
+After the number of steps specified is reached, the simulation would continue
 to allow all users to complete their retransmission queues, which would usually
 take a few extra steps to complete.
 Once all users had finished their retransmissions, statistics would be compiled
 on a per-user basis, and overall averages would be returned.
 
-The main simulation stage was composed of several smaller elements modeling
+The main simulation stage is composed of several smaller elements modeling
 the messages and user interactions.
 These elements were modeled relatively simplisitically, so future additions could be
 made to model other complex aspects of communication e.g. multi-packet messages,
 fluctuating communication range, power usage, etc.
 
-Finally, the last stage was a statistical analysis layer which enabled taking overall
+Finally, the last stage is a statistical analysis layer which enabled taking overall
 statistics over a range of parameter values and creating relevant tables and graphs,
 which are used in the results portion of this paper.
 
