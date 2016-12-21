@@ -51,9 +51,11 @@ import argparse
 from argLimitedFloat import Range
 def ulArgBuild(parser):
     parser.add_argument('-x', metavar='M', type=int, default=100,
-        choices=[Range(10,1000)], help='The x-axis length M of the simulation grid')
+        choices=[Range(10,1000)], help='Set x-axis length M of the simulation grid')
     parser.add_argument('-y', metavar='N', type=int, default=100,
-        choices=[Range(10,1000)], help='The y-axis length M of the simulation grid')
+        choices=[Range(10,1000)], help='Set y-axis length M of the simulation grid')
+    parser.add_argument('-a', metavar='A', type=int,
+        choices=[Range(10,1000)], help='Set both x-axis and y-axis of the simulation grid')
     parser.add_argument('-r', '--radius', metavar='radius', type=float, default=10.0,
         choices=[Range(1,1000)], help='Broadcast radius [feet]')
     group = parser.add_mutually_exclusive_group(required=False)
@@ -63,6 +65,10 @@ def ulArgBuild(parser):
         help='A file containing a list of users in the simulation')
 
 def ulArgParse(args):
+    # If square area length set, override x and y values
+    if args.a:
+        args.x = args.a
+        args.y = args.a
     if args.import_userlist:
         eprint("     Starting userlist import... ", end="")
         startTime = time()
