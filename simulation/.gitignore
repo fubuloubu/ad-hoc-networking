@@ -1,2 +1,4 @@
+# Generated Graphs and Tables
+*.tex
 # Simulation directory
 sims/
