@@ -248,14 +248,18 @@ def graph(datamodel, target_list, selected_metrics, name_replace_list):
     ydata = transpose(ydata)
     # Create graph
     fig = plt.figure()
-    x = range(len(xdata))
-
-    for i, metric in enumerate(metrics):
-        plt.plot(x, ydata[i], 'o-', lw=4.0, label=metric)
 
     # Set temporary x-axis to text xdata
+    try:
+        x = list(map(float, xdata))
+    except ValueError:
+        x = range(len(xdata))
     plt.xticks(x, xdata)
-    plt.legend(loc='lower right', bbox_to_anchor=(0.5, -0.05))
+    #Don't want legends
+    #plt.legend(loc='lower right', bbox_to_anchor=(0.5, -0.05))
+    
+    for i, metric in enumerate(metrics):
+        plt.plot(x, ydata[i], 'o-', lw=4.0, label=metric)
     
     # Write to a temporary file, 
     import uuid
