@@ -41,7 +41,13 @@ copy_results: $(SIMTABLES) $(SIMGRAPHS)
 $(SIMTABLES) $(SIMGRAPHS):
 	@cd ../simulation && $(MAKE) clean && $(MAKE) -j4 all
 
-Final-Report.pdf: copy_results
+%.tex.bak: %.tex
+	@echo "SPLCHK $<"
+	@aspell check $<
+REPORT_SECTIONS=abstract.tex background.tex \
+	     methodology.tex results.tex conclusion.tex
+
+Final-Report.pdf: copy_results $(addsuffix .bak,$(REPORT_SECTIONS))
 Final-Presentation.pdf: copy_results
 
 # Clean rule to remove intermediates 
