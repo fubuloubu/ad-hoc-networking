@@ -28,18 +28,16 @@ endef
 # This is to remove extra instructions from matplotlib2tikz
 tail_copy=tail -n +$(2) $(1) > $(shell basename $(1))
 
-SIMTABLES=$(wildcard ../simulation/*-table.tex)
 SIMGRAPHS=$(wildcard ../simulation/*-graph.tex) \
 		  ../simulation/sim-usergraph.tex
 
 .PHONY: copy_results
-copy_results: $(SIMTABLES) $(SIMGRAPHS)
+copy_results: $(SIMGRAPHS)
 	@echo "  COPY results"
-	@$(foreach file,$(SIMTABLES),$(shell cp $(file) .;))
-	@$(foreach file,$(SIMGRAPHS),$(call tail_copy,$(file),10);)
+	@$(foreach file,$^,$(call tail_copy,$(file),10);)
 
-$(SIMTABLES) $(SIMGRAPHS):
-	@cd ../simulation && $(MAKE) clean && $(MAKE) -j4 all
+$(SIMGRAPHS):
+	@cd ../simulation && $(MAKE) -j4 all
 
 %.tex.bak: %.tex
 	@echo "SPLCHK $<"
