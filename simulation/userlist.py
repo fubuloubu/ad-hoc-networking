@@ -122,3 +122,4 @@ if __name__ == '__main__':
             os_remove(filename)
             # then return the string
             print(graph_data)
+            #TODO: For whatever reason, this graph scales weird
