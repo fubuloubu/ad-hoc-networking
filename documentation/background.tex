@@ -38,7 +38,7 @@ This means that we could assume that all users had the same transmission strengt
 all messages could be represented simply by a reduced protocol, and that no other inconsistencies
 would have to be modeled for our user model.
 Secondly, we assumed that all users would be active at all times (available to send or receive
-messages), there would be no dynamic delays in processing, and there were no inherant delays in
+messages), there would be no dynamic delays in processing, and there were no inherent delays in
 communication between any node.
 Lastly, we assumed that overall communication happened randomly in short, one-message bursts,
 such that overall communication of a single message could be measured simply as receipt of the
@@ -46,11 +46,11 @@ individual packets.
 
 With the assumptions in place, we needed a transmission and routing protocol in order to produce
 message routing that accurately models the communications between nodes.
-Initially, the AODV algorithm \cite{perkins99,roter00} was studied for implementation into the
-usernode model, however due to time constraints the algorithm was simplified to a very simple
-stack-based broadcast retransmission model where each node attempts retransmissison of any
+Initially, the AODV algorithm \cite{perkins99,royer00} was studied for implementation into the
+user-node model, however due to time constraints the algorithm was simplified to a very simple
+stack-based broadcast re-transmission model where each node attempts re-transmission of any
 messages it hears by storing those messages in a limited size storage stack.
-If a node exceeds it's retransmit stack, it pops the oldest message and appends the new message 
+If a node exceeds it's re-transmit stack, it pops the oldest message and appends the new message 
 onto the stack.
 The message itself stores the transmission list, so a user can avoid re-transmitting the same
 message and flooding the stack.
