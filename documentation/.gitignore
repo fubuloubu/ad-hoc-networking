@@ -8,6 +8,8 @@
 *.aux
 *.png
 *.toc
+*.lol
+*.lof
 _minted-*/
 
 # Beamer
