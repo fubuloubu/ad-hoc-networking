@@ -1,10 +1,4 @@
 \section{Methodology}
-The objective of the project is to produce a parameterized simulation 
-that could represent an ad-hoc networking scenario and compare the effects 
-of different parameters on the overall communications system in terms of 
-per-user average success rate (successfully received messages) 
-and latency of those messages.
-
 The simulation is developed in several components.
 The first stage of the simulation is the map creation layer,
 which places N users (cellular devices) randomly on an \textit{n x m} map at a
@@ -35,7 +29,7 @@ At each stage of the simulation, a randomly chosen subset of all users on the ma
 were chosen based upon the intensity ratio to attempt to send a message to another
 randomly chosen user on the map.
 After the number of steps specified is reached, the simulation would continue
-to allow all users to complete their re-transmission queues, which would usually
+to allow all users to complete their re-transmission stacks, which would usually
 take a few extra steps to complete.
 Once all users had finished their re-transmissions, statistics would be compiled
 on a per-user basis, and overall averages would be returned.
