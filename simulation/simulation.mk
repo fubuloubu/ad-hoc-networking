@@ -34,7 +34,7 @@ varR=$(shell echo {10..160..5})
 varU=$(shell echo {100..1600..50})
 # This one must be handled separately
 # because it's not in the userlist
-varI=$(shell echo 0.{010..100..10})
+varI=$(shell echo 0.{010..100..05})
 
 USERLIST_FILENAME=$(addsuffix .ul,$(addprefix $(SIMDIR)/$(SIMPREFIX),$(1)))
 varA_USERLISTS=$(foreach arg,$(varA),$(call USERLIST_FILENAME,-a$(arg)))
@@ -112,15 +112,15 @@ varU_GRAPHS=varusers-average-latency-graph.tex varusers-success-rate-graph.tex
 $(varU_GRAPHS): $(varU_RESULTS)
 
 # Handle this one separately because of metric location
-varI_TABLES=varintensity-average-latency-table.tex varintensity-success-rate-table.tex
-$(varI_TABLES): $(varI_RESULTS)
+varI_GRAPHS=varintensity-average-latency-graph.tex varintensity-success-rate-graph.tex
+$(varI_GRAPHS): $(varI_RESULTS)
 	@echo "   GEN $@"
 	@./simulation_results_parser.py \
-		-m $(call GET_METRIC,$@,table)-[0-9]* \
-		-f latex \
-		-t $^ >$@
+		-m $(call GET_METRIC,$@,graph)-[0-9]* \
+		--x-axis $(varI) \
+		-g $^ >$@
 
-ALL_ITEMS=$(varA_GRAPHS) $(varR_GRAPHS) $(varU_GRAPHS) $(varI_TABLES)
+ALL_ITEMS=$(varA_GRAPHS) $(varR_GRAPHS) $(varU_GRAPHS) $(varI_GRAPHS)
 
 .PHONY: all
 all: $(ALL_ITEMS) $(SIMDIR)/$(SIMPREFIX)-usergraph.tex
