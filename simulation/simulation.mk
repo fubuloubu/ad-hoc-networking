@@ -36,7 +36,7 @@ varU=100 120 150 200 250 300 400 500 600 800 1000 1200 1600
 varI=0.010 0.012 0.015 0.020 0.030 0.040 0.060 0.080 0.100
 
 USERLIST_FILENAME=$(addsuffix .ul,$(addprefix $(SIMDIR)/$(SIMPREFIX),$(1)))
-varA_USERLISTS=$(foreach arg,$(varA),$(call USERLIST_FILENAME,-x$(arg)-y$(arg)))
+varA_USERLISTS=$(foreach arg,$(varA),$(call USERLIST_FILENAME,-a$(arg)))
 varR_USERLISTS=$(foreach arg,$(varR),$(call USERLIST_FILENAME,-r$(arg)))
 varU_USERLISTS=$(foreach arg,$(varU),$(call USERLIST_FILENAME,-u$(arg)))
 varI_USERLISTS=$(SIMDIR)/$(SIMPREFIX).ul
@@ -98,8 +98,7 @@ GET_METRIC=$(shell echo $(1) | sed "s/[[:lower:]]*-\(.*\)-$(2).tex/\1/")
 		-r \
 		sims/sim "" \
 		.results "" \
-		+x "" \
-		+y x \
+		+a "" \
 		+r "" \
 		+u "" \
 		-g $^ >$@
@@ -141,3 +140,6 @@ clean:
 	@echo " CLEAN simulation"
 	@rm -rf __pycache__
 	@rm -f *.pyc
+
+.PHONY: all-clean
+all-clean: clean clean-results clean-figures
