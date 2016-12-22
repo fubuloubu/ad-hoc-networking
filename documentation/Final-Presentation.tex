@@ -23,9 +23,9 @@
     
     \listheading{Project Choice}
     \begin{itemize}
-        \item Intuition
-        \item Easy Framework for Study
-        \item Extensible Framework for Comparing Different Factors and Algorithms
+        \item Gain Intuition
+        \item Develop an Easy Framework for Study
+        \item Create Extensible Framework for Comparison of Different Factors and Algorithms
     \end{itemize}
 
 \end{frame}
@@ -60,7 +60,7 @@
     
     \listheading{Simulation Setup}
     \begin{itemize}
-        \item A Standard Setup was used
+        \item A Baseline Setup was used
         \item Each simulation only varied one parameter
         \item Each simulation ran for 50+ steps
         \begin{itemize}
@@ -73,17 +73,17 @@
 \begin{frame}
     \frametitle{Methodology}
     \centering
-    \listheading{Standardized Setup}\\[0.25cm]
+    \listheading{Baseline Values}\\[0.25cm]
     \begin{tabular}{l|rl}
         \hline
-        Parameter               & Value     & Units         \\
+        Parameter               & Value     & Units                     \\
         \hline
-        Grid Area               & 100x100   & feet squared  \\
-        Transmission Radius     & 10        & feet          \\
-        User Population         & 200       & users         \\
+        Grid Area               & 100x100   & feet squared              \\
+        Transmission Radius     & 10        & feet                      \\
+        User Population         & 200       & users                     \\
         \hline
-        Intensity Ratio         & 0.05      & none          \\
-        Simulation Duration     & 50        & steps         \\
+        Intensity Ratio         & 0.05      & msgs per user per step    \\
+        Simulation Duration     & 50        & steps                     \\
         \hline
     \end{tabular}\\[0.5cm]
     
@@ -104,7 +104,12 @@
 
 \begin{frame}
     \frametitle{Sample User List}
-    \input{sim-usergraph.tex}
+    \begin{center}
+    \resizebox{.7\textwidth}{!}{\input{sim-usergraph.tex}}
+    \end{center}
+    
+    Each user is modeled as a black point with the radius of the user colored in
+    for visualization purposes.
 
 \end{frame}
 
@@ -153,9 +158,9 @@
 
     \listheading{Larger Separation Distance}
     \begin{itemize}
-        \item Increase lowers overall chance of success
+        \item Lowers overall chance of success
         \item Successful messages are between closer users
-        \item Low interference\\[0.5cm]
+        \item Lowers interference\\[0.5cm]
     \end{itemize}
     
     \listheading{Increased Transmission Power}
@@ -175,16 +180,7 @@
 \end{frame}
 
 \begin{frame}
-    \frametitle{Future Work}
-    \listheading{Simulation Evaluation}
-    \begin{itemize}
-        \item Simulation needs more sophistication
-        \begin{itemize}
-            \item Especially in regards to Power Usage
-        \end{itemize}
-        \item Good Baseline for future implementations
-        \item Good Baseline for testing different algorithms\\[0.5cm]
-    \end{itemize}
+    \frametitle{Conclusions}
 
     \listheading{Practical Suggestions}
     \begin{itemize}
@@ -200,6 +196,20 @@
             \item Messaging Intensity
             \item Battery Life (when accounting for Power considerations)
         \end{itemize}
+    \end{itemize}
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{Future Work}
+    \listheading{Simulation Evaluation}
+    \begin{itemize}
+        \item Simulation needs more sophistication
+        \begin{itemize}
+            \item Especially in regards to Power Usage
+        \end{itemize}
+        \item Good Baseline for future implementations
+        \item Good Baseline for testing different algorithms\\[0.5cm]
     \end{itemize}
 
 \end{frame}
