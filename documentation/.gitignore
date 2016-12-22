@@ -18,8 +18,3 @@ _minted-*/
 
 # Aspell
 *.bak
-
-# Copied from simulation results
-*-graph.tex
-*-table.tex
-sim-usergraph.tex

@@ -25,28 +25,14 @@ endef
 	fi
 	@$(call RUN_PDFLATEX)
 
-# This is to remove extra instructions from matplotlib2tikz
-tail_copy=tail -n +$(2) $(1) > $(shell basename $(1))
-
-SIMGRAPHS=$(wildcard ../simulation/*-graph.tex) \
-		  ../simulation/sim-usergraph.tex
-
-.PHONY: copy_results
-copy_results: $(SIMGRAPHS)
-	@echo "  COPY results"
-	@$(foreach file,$^,$(call tail_copy,$(file),10);)
-
-$(SIMGRAPHS):
-	@cd ../simulation && $(MAKE) -j4 all
-
 %.tex.bak: %.tex
 	@echo "SPLCHK $<"
 	@aspell check $<
 REPORT_SECTIONS=abstract.tex background.tex \
 	     methodology.tex results.tex conclusion.tex
 
-Final-Report.pdf: copy_results $(addsuffix .bak,$(REPORT_SECTIONS))
-Final-Presentation.pdf: copy_results
+Final-Report.pdf: $(addsuffix .bak,$(REPORT_SECTIONS))
+Final-Presentation.pdf:
 
 # Clean rule to remove intermediates 
 # produced by LaTeX and relevant libraries
