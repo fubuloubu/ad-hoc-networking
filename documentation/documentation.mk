@@ -32,7 +32,7 @@ REPORT_SECTIONS=abstract.tex background.tex \
 	     methodology.tex results.tex conclusion.tex
 
 Final-Report.pdf: $(addsuffix .bak,$(REPORT_SECTIONS))
-Final-Presentation.pdf:
+Final-Presentation.pdf: Final-Presentation.tex.bak
 
 # Clean rule to remove intermediates 
 # produced by LaTeX and relevant libraries
