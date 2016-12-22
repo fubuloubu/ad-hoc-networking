@@ -1,11 +1,10 @@
 \section{Results and Discussion}
-%TODO: Complete
 The simulation was run for independent variations of four parameters under constant conditions.
 The constant conditions for the experiment are described in Figure \ref{fig:consttable} below.
 
 \begin{figure}[!htb]
     \centering
-    \begin{tabular}{c|rl}
+    \begin{tabular}{l|rl}
         \hline
         Parameter               & Value     & Units         \\
         \hline
@@ -88,9 +87,23 @@ Figure \ref{fig:varusers} shows the results when the user population is increase
 {Network Properties with Increasing Number of Users given Constant Area and Radius}
 {fig:varusers}
 
-Figure \ref{fig:varusers}a shows a steep exponential decrease in successfully received packets.
+Figure \ref{fig:varusers}a shows an exponential decrease in successfully received packets with
+an asymptote. The asymptote appears to start around 500 users, and experiences a much smaller,
+linear decay after that. The point where the asymptote starts may correspond to a saturation in the
+number of users compared to the grid size and transmission radius. The intuition here would point to
+a ceiling on the capacity that such a system can support. This could be an artificial limit based
+on the size of the re-transmit stack allocated to each user device as well as the TTL of each message.
+If the stack where increased, more messages could be re-transmitted potentially increasing the
+likelihood of success. However, as the number of users increase the amount of interference and
+capacity considerations might limit the effectiveness of such a solution. Increasing the TTL
+parameter would be a better solution to increasing the success rate since a message would
+logically need more hops to make it to it's destination when the area is more crowded.
 
-Figure \ref{fig:varusers}b shows a slow but exponential decrease in latency with an asymptote.
+Figure \ref{fig:varusers}b shows a exponential decrease in latency. The intuition here, when coupled
+with the success rate, suggests that the successful messages are between two users that are 
+increasingly closer to each other as the space gets more crowded. Increasing the TTL to gain a higher
+success rate would have the effect of increasing the average latency of successful messages, as
+again more hops would be needed to reach destinations as the user density increases.
 
 \subsection{Messaging Intensity Ratio Variation}
 Figure \ref{fig:varintensity} shows the results when the transmission intensity ratio is increased.
@@ -103,6 +116,17 @@ based on the overall user population, instead of characteristics of the individu
 {Network Properties with Increasing Intensity Ratio given Constant Area, Radius and Users}
 {fig:varintensity}
 
-Figure \ref{fig:varintensity}a shows a steep exponential decrease in successfully received packets.
-
-Figure \ref{fig:varintensity}b shows a slow but exponential decrease in latency with an asymptote.
+Figure \ref{fig:varintensity}a shows a semi-linear decrease in successfully received packets.
+The increase in intensity corresponds to a sharp and then gradual decrease in the rate of success.
+The initial sharp decrease corresponds to the area before saturating the same threshold of
+user re-transmissions vs. user density as varying the number of users does. However, the intuition
+for the more gradual decrease after that point suggests that as the intensity increases, there
+is a higher likelihood that the messaging is occurring between users that are closer together.
+This corresponds to figure \ref{fig:varintensity}b, which shows a steep linear decrease in latency.
+Reviewing these two graphs in parallel suggests this intuition is correct, in that an increasing
+in the amount of communication overall increases the load on the system, and reduces the effective
+range of messaging between two users. Similar to the user density increase, the solution here
+would be to increase the TTL of the messaging. However, with this increase in the liveness of
+individual messages coupled with the overall increase in the number of messages, there may be an
+overall limit in the capacity of this system to deliver messages even with the increased liveness
+due to increased interference.
