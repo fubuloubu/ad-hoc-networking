@@ -1,6 +1,11 @@
 \input{format/presentation-formatting.tex}
 \subtitle{\class}
 \institute{Columbia University}
+\usetheme{Singapore}
+
+\newcommand{\listheading}[1]{%
+    {\Large #1}
+}
 
 \begin{document}
 \begin{frame}
@@ -8,15 +13,205 @@
 \end{frame}
 
 \begin{frame}
-    \frametitle{Slide 1}
+    \frametitle{Motivation}
+    \listheading{Need for Adaptive, Local, and Free Communication}
+    \begin{itemize}
+        \item Communicating via Missed-calls "Beeping" in Sub-Saharan Africa \cite{beeping}
+        \item Protests or Large Outdoor Gatherings
+        \item Teenagers communicating via Jott App \cite{jott-techcrunch,jott-forbes}\\[0.5cm]
+    \end{itemize}
+    
+    \listheading{Project Choice}
+    \begin{itemize}
+        \item Intuition
+        \item Easy Framework for Study
+        \item Extensible Framework for Comparing Different Factors and Algorithms
+    \end{itemize}
+
 \end{frame}
 
 \begin{frame}
-    \frametitle{Slide 2}
+    \frametitle{Background}
+    \listheading{Active Area of Research}
+    \begin{itemize}
+        \item Adaptive, Power-Efficient, and High-Performance Algorithms
+        \item Lots of Trade-Offs
+        \item Intuition is Often Difficult
+        \item AODV Routing Algorithm \cite{perkins99,royer00}
+        \item Simulation of Ad-Hoc Networks \cite{morshed08}
+        \item Scaleability of Ad-Hoc Algorithms \cite{lee01}
+    \end{itemize}
+
 \end{frame}
 
 \begin{frame}
-    \frametitle{Slide 3}
+    \frametitle{Methodology}
+    \listheading{Simulation Design}
+    \begin{itemize}
+        \item Used Python v3.5
+        \item Constructed in 3 layers
+        \begin{itemize}
+            \item Create Randomly Populated List of Users
+            \item Run simulation Using Provided list
+            \item Collect Statistics about Message Propagation
+        \end{itemize}
+        \item Graph and Print Statistics\\[0.5cm]
+    \end{itemize}
+    
+    \listheading{Simulation Setup}
+    \begin{itemize}
+        \item A Standard Setup was used
+        \item Each simulation only varied one parameter
+        \item Each simulation ran for 50+ steps
+        \begin{itemize}
+            \item 50 Steps of new message transmission
+            \item Additional time to completely exhaust re-transmission stacks
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Methodology}
+    \centering
+    \listheading{Standardized Setup}\\[0.25cm]
+    \begin{tabular}{l|rl}
+        \hline
+        Parameter               & Value     & Units         \\
+        \hline
+        Grid Area               & 100x100   & feet squared  \\
+        Transmission Radius     & 10        & feet          \\
+        User Population         & 200       & users         \\
+        \hline
+        Intensity Ratio         & 0.05      & none          \\
+        Simulation Duration     & 50        & steps         \\
+        \hline
+    \end{tabular}\\[0.5cm]
+    
+    \listheading{Parameter Ranges}\\[0.25cm]
+    \begin{tabular}{l|rr}
+        \hline
+        Parameter               & Min   & Max       \\
+        \hline
+        Grid Area               & 10x10 & 160x160   \\
+        Transmission Radius     & 10    & 160       \\
+        User Population         & 100   & 1600      \\
+        \hline
+        Intensity Ratio         & 0.010 & 0.100     \\
+        \hline
+    \end{tabular}
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{Sample User List}
+    \input{sim-usergraph.tex}
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{Results: User Area}
+\sidebysidefigures
+{vararea-success-rate-graph.tex}       {Success Rate vs. Area}
+{vararea-average-latency-graph.tex}    {Average Latency vs. Area}
+{Network Properties with Increasing Area given Constant Radius and Number of Users}
+{fig:vararea}
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{Results: User Transmission Radius}
+\sidebysidefigures
+{varradius-success-rate-graph.tex}     {Success Rate vs. Radius}
+{varradius-average-latency-graph.tex}  {Average Latency vs. Radius}
+{Network Properties with Increasing Radius Area given Constant Area and Number of Users}
+{fig:varradius}
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{Results: User Population}
+\sidebysidefigures
+{varusers-success-rate-graph.tex}      {Success Rate vs. Number of Users}
+{varusers-average-latency-graph.tex}   {Average Latency vs. Number of Users}
+{Network Properties with Increasing Number of Users given Constant Area and Radius}
+{fig:varusers}
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{Results: Messaging Intensity Ratio}
+\sidebysidefigures
+{varintensity-success-rate-graph.tex}      {Success Rate vs. Intensity Ratio}
+{varintensity-average-latency-graph.tex}   {Average Latency vs. Intensity Ratio}
+{Network Properties with Increasing Intensity Ratio given Constant Area, Radius and Users}
+{fig:varintensity}
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{Conclusions}
+
+    \listheading{Larger Separation Distance}
+    \begin{itemize}
+        \item Increase lowers overall chance of success
+        \item Successful messages are between closer users
+        \item Low interference\\[0.5cm]
+    \end{itemize}
+    
+    \listheading{Increased Transmission Power}
+    \begin{itemize}
+        \item Increases Interference
+        \item Reduces Latency
+        \item Counteracts Large Separation Distances somewhat\\[0.5cm]
+    \end{itemize}
+    
+    \listheading{Increased User Population}
+    \begin{itemize}
+        \item Reduction in Success
+        \item Successful Messages are between two closer users
+        \item Increased interference
+    \end{itemize}
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{Future Work}
+    \listheading{Simulation Evaluation}
+    \begin{itemize}
+        \item Simulation needs more sophistication
+        \begin{itemize}
+            \item Especially in regards to Power Usage
+        \end{itemize}
+        \item Good Baseline for future implementations
+        \item Good Baseline for testing different algorithms\\[0.5cm]
+    \end{itemize}
+
+    \listheading{Practical Suggestions}
+    \begin{itemize}
+        \item Active Management of:
+        \begin{itemize}
+            \item Re-Transmission Stack Size
+            \item Message TTL
+            \item Transmission Power
+        \end{itemize}
+        \item Based on:
+        \begin{itemize}
+            \item User density (Separation Distance vs. Population size)
+            \item Messaging Intensity
+            \item Battery Life (when accounting for Power considerations)
+        \end{itemize}
+    \end{itemize}
+
+\end{frame}
+
+\begin{frame}[allowframebreaks]
+    \frametitle{References}
+    \makebibliography{bibliography.bib}
+\end{frame}
+
+\begin{frame}
+    \centering
+    {\LARGE Thank you!}
 \end{frame}
 
 \end{document}
