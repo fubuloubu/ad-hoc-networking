@@ -1,19 +1,22 @@
 \section{Conclusion}
 In conclusion, we have summarized in our results some intuition to the behavior of Ad-Hoc Networks
 over a variety of different situations.
-We have described what the overall trend is in latency and successful transmission rate
-over varying area, transmission radius, and user population, as well as transmission intensity.
-All of this analysis was done under the assumptions of a simplified re-transmission algorithm
-utilizing a queue that allowed for modeling the communication strategies these devices typically
-use.
+We have described what the overall trend is in terms of latency and successful transmission rate
+over varying area, transmission radius, and user population, as well as messaging intensity.
+All of this analysis was done under the assumptions of a re-transmission algorithm
+utilizing a fixed-size stack and a messaging strategy that used a static TTL parameter
+that allowed for simplified modeling the communication strategies these devices typically use.
+Using the intuition we have built, we can make overall recommendations that
+active management of parameters such as stack size, user transmission radius/power
+(and consequently user battery life), and TTL of the messages would increase the likelihood of 
+success and manage a reasonable level of average latency.
 
 %Future work
 While this simulation is a good baseline for categorizing Ad-Hoc Networks, the project could
 benefit from more realistic modeling of the style of communication, including more sophisticated
 models for message size, messaging dynamics, power usage, and interference.
 As it stands, this simulation may be an overly liberal estimate of system behavior and additional
-modeled may yield to large differences in the parameters measured here.
-Also, different re-transmission algorithms can be modeled in future projects to compare
-the effectiveness of different schemes.
+modeling may yield to large differences in the parameters measured here.
 However, this simulation provides a good backbone for those activities and hopefully future
-projects may explore these possibilities.
+projects may explore different possibilities in order to maximize per-user performance of
+an Ad-Hoc messaging system.
