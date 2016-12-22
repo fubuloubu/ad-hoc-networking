@@ -10,7 +10,7 @@ make -j[N] all
 ~~~~
 
 where [N] is the number of processes you would like to dedicate to the simulation
-(Reccomended is 2x number of CPU Cores)
+(Recommended is 2x number of CPU Cores)
 
 To clean up all artifacts, run:
 ~~~~bash
