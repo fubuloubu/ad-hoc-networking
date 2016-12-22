@@ -29,12 +29,12 @@ GET_SIM_ARGS_FROM_FILE=$(subst -, -,$(subst $(SIMPREFIX),,$(basename $(notdir $(
 
 # Experiments
 SHELL:=/bin/bash
-varA=$(shell echo {10..160..5})
-varR=$(shell echo {10..160..5})
-varU=$(shell echo {100..1600..50})
+varA=$(shell echo {10..160..1})
+varR=$(shell echo {10..160..1})
+varU=$(shell echo {100..1600..10})
 # This one must be handled separately
 # because it's not in the userlist
-varI=$(shell echo 0.{010..100..05})
+varI=$(shell echo 0.{010..100..01})
 
 USERLIST_FILENAME=$(addsuffix .ul,$(addprefix $(SIMDIR)/$(SIMPREFIX),$(1)))
 varA_USERLISTS=$(foreach arg,$(varA),$(call USERLIST_FILENAME,-a$(arg)))
