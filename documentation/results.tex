@@ -1,6 +1,27 @@
 \section{Results and Discussion}
 %TODO: Complete
-Results here
+The simulation was run for independent variations of four parameters under constant conditions.
+The constant conditions for the experiment are described in Figure \ref{fig:consttable} below.
+
+\begin{figure}[!htb]
+    \centering
+    \begin{tabular}{c|c}
+        \hline
+        Parameter               & Value     \\
+        \hline
+        Grid Area               & 100x100   \\
+        Transmission Radius     & 10        \\
+        User Population         & 200       \\
+        Intensity Ratio         & 0.05      \\
+        \hline
+    \end{tabular}
+    \caption{Table of constants}
+    \label{fig:consttable}
+\end{figure}
+
+\subsection{User Area Separation Variation}
+Figure \ref{fig:vararea} shows the results when the area is increased
+(also increasing average user separation).
 
 \sidebysidefigures
 {vararea-success-rate-graph.tex}       {Success Rate vs. Area}
@@ -8,8 +29,32 @@ Results here
 {Network Properties with Increasing Area given Constant Radius and Number of Users}
 {fig:vararea}
 
-Figure \ref{fig:vararea}a Linear increase Latency
-Figure \ref{fig:vararea}b linear decrease in success rate (increase in dropped packets)
+Figure \ref{fig:vararea}a shows a exponential decay in successfully received packets.
+The decay starts from 100\% corresponding to the point where the users are crowded very close
+together (user transmission radius approximately equal to grid size) and swiftly decays as
+the grid size is increased.
+This result means that as separation distance increases for a small population, there
+is a corresponding drop-off in performance that quickly makes this kind of network non-viable.
+In practice, this would mean that connecting users would need to increase their transmission radius
+and therefore their power in order to overcome this limitation.
+However, as cellular devices are small, this solution has limited effect.
+
+Figure \ref{fig:vararea}b shows a logarithmic increase in latency.
+The results become very erratic when the area is very large because so few messages
+are received at that point.
+The effect tails off as user separation increases because, even though the probability
+of success is greatly reduced, the successful paths that can be formed between users
+occur when communication is traveling between well-placed users in the communication path.
+This increase in area shares the largest possible latencies overall as when a message does
+successful travel to it's intended recipient, it has been re-transmitted by participating
+users many times.
+There is an artificial limit to this latency in the fact that each message has a Time-To-Live (TTL)
+parameter which controls how many hops it can make before it is discarded.
+In areas where user separation far outpaces transmission radius, the intuition here is to
+increase the TTL message parameter to ensure a greater success rate.
+
+\subsection{User Transmission Radius Variation}
+Figure \ref{fig:varradius} shows the results when the user transmission radius is increased.
 
 \sidebysidefigures
 {varradius-success-rate-graph.tex}     {Success Rate vs. Radius}
@@ -17,8 +62,20 @@ Figure \ref{fig:vararea}b linear decrease in success rate (increase in dropped p
 {Network Properties with Increasing Radius Area given Constant Area and Number of Users}
 {fig:varradius}
 
-Non-linear decrease in latency, non-linear increase in success rate
+Figure \ref{fig:varradius}a shows a logarithmic increase in successfully received packets.
+The success rate increases from 0\% near the trivial case when user radius is much less
+than the grid size and user population can support, to 100\% again near the region where
+the transmission radius approximately equals grid size.
+The intuition here mirrors the intuition for the increasing grid size and produces a strong
+correlation towards increasing the transmission radius (at the expense of cellular battery life)
+when the user population and separation distance do not support normal communication.
 
+Figure \ref{fig:varradius}b shows a exponential decay in in latency.
+There is an asymptote that is reached near the point where user transmission radius is
+close to separation distance.
+This could 
+
+\subsection{User Population Variation}
 \sidebysidefigures
 {varusers-success-rate-graph.tex}      {Success Rate vs. Number of Users}
 {varusers-average-latency-graph.tex}   {Average Latency vs. Number of Users}
@@ -27,6 +84,7 @@ Non-linear decrease in latency, non-linear increase in success rate
 
 Linear Reduction in latency, Non-linear reduction in success rate
 
+\subsection{Messaging Intensity Ratio Variation}
 \sidebysidefigures
 {varintensity-success-rate-graph.tex}      {Success Rate vs. Intensity Ratio}
 {varintensity-average-latency-graph.tex}   {Average Latency vs. Intensity Ratio}
