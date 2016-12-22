@@ -5,14 +5,16 @@ The constant conditions for the experiment are described in Figure \ref{fig:cons
 
 \begin{figure}[!htb]
     \centering
-    \begin{tabular}{c|c}
+    \begin{tabular}{c|rl}
         \hline
-        Parameter               & Value     \\
+        Parameter               & Value     & Units         \\
         \hline
-        Grid Area               & 100x100   \\
-        Transmission Radius     & 10        \\
-        User Population         & 200       \\
-        Intensity Ratio         & 0.05      \\
+        Grid Area               & 100x100   & feet squared  \\
+        Transmission Radius     & 10        & feet          \\
+        User Population         & 200       & users         \\
+        \hline
+        Intensity Ratio         & 0.05      & none          \\
+        Simulation Duration     & 50        & steps         \\
         \hline
     \end{tabular}
     \caption{Table of constants}
@@ -72,23 +74,35 @@ when the user population and separation distance do not support normal communica
 
 Figure \ref{fig:varradius}b shows a exponential decay in in latency.
 There is an asymptote that is reached near the point where user transmission radius is
-close to separation distance.
-This could 
+close to the same region where separation distance and transmission radius are approximately
+equal. This asymptote could appear due to interference between transmissions as the radius 
+gets larger. The intuition here is that there is an upper limit to the effectiveness of increasing
+the user transmission radius based on the population size and separation distance of the users.
 
 \subsection{User Population Variation}
+Figure \ref{fig:varusers} shows the results when the user population is increased.
+
 \sidebysidefigures
 {varusers-success-rate-graph.tex}      {Success Rate vs. Number of Users}
 {varusers-average-latency-graph.tex}   {Average Latency vs. Number of Users}
 {Network Properties with Increasing Number of Users given Constant Area and Radius}
 {fig:varusers}
 
-Linear Reduction in latency, Non-linear reduction in success rate
+Figure \ref{fig:varusers}a shows a steep exponential decrease in successfully received packets.
+
+Figure \ref{fig:varusers}b shows a slow but exponential decrease in latency with an asymptote.
 
 \subsection{Messaging Intensity Ratio Variation}
+Figure \ref{fig:varintensity} shows the results when the transmission intensity ratio is increased.
+Note this is the only parameter that this parameter was the only parameter modeled in simulation
+based on the overall user population, instead of characteristics of the individual users.
+
 \sidebysidefigures
 {varintensity-success-rate-graph.tex}      {Success Rate vs. Intensity Ratio}
 {varintensity-average-latency-graph.tex}   {Average Latency vs. Intensity Ratio}
 {Network Properties with Increasing Intensity Ratio given Constant Area, Radius and Users}
 {fig:varintensity}
 
-Linear reduction in latency, Non-linear reduction in success rate
+Figure \ref{fig:varintensity}a shows a steep exponential decrease in successfully received packets.
+
+Figure \ref{fig:varintensity}b shows a slow but exponential decrease in latency with an asymptote.
