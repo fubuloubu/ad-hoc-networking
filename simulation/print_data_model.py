@@ -272,7 +272,7 @@ def graph(datamodel, target_list, selected_metrics, name_replace_list, x_axis):
     #plt.legend(loc='lower right', bbox_to_anchor=(0.5, -0.05))
     
     for i, metric in enumerate(metric_labels):
-        plt.plot(x, y[i], 'o-', lw=4.0, label=metric)
+        plt.plot(x, y[i], '-', lw=4.0, label=metric)
     
     # Write to a temporary file, 
     import uuid
