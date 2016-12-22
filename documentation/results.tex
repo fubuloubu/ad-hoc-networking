@@ -1,23 +1,43 @@
 \section{Results and Discussion}
 The simulation was run for independent variations of four parameters under constant conditions.
-The constant conditions for the experiment are described in Figure \ref{fig:consttable} below.
+The constant conditions used as the baseline for the experiment are described in 
+Figure \ref{fig:consttable}.
+The ranges over which all the parameters were individually varied are listed in 
+Figure \ref{fig:rangetable}.
 
 \begin{figure}[!htb]
     \centering
     \begin{tabular}{l|rl}
         \hline
-        Parameter               & Value     & Units         \\
+        Parameter               & Value     & Units                     \\
         \hline
-        Grid Area               & 100x100   & feet squared  \\
-        Transmission Radius     & 10        & feet          \\
-        User Population         & 200       & users         \\
+        Grid Area               & 100x100   & feet squared              \\
+        Transmission Radius     & 10        & feet                      \\
+        User Population         & 200       & users                     \\
         \hline
-        Intensity Ratio         & 0.05      & none          \\
-        Simulation Duration     & 50        & steps         \\
+        Intensity Ratio         & 0.05      & msgs per user per step    \\
+        Simulation Duration     & 50        & steps                     \\
         \hline
     \end{tabular}
     \caption{Table of constants}
     \label{fig:consttable}
+\end{figure}
+
+\begin{figure}[!htb]
+    \centering
+    \begin{tabular}{l|rr}
+        \hline
+        Parameter               & Min   & Max       \\
+        \hline
+        Grid Area               & 10x10 & 160x160   \\
+        Transmission Radius     & 10    & 160       \\
+        User Population         & 100   & 1600      \\
+        \hline
+        Intensity Ratio         & 0.010 & 0.100     \\
+        \hline
+    \end{tabular}
+    \caption{Parameter Ranges}
+    \label{fig:rangetable}
 \end{figure}
 
 \subsection{User Area Separation Variation}
@@ -31,7 +51,7 @@ Figure \ref{fig:vararea} shows the results when the area is increased
 {fig:vararea}
 
 Figure \ref{fig:vararea}a shows a exponential decay in successfully received packets.
-The decay starts from 100\% corresponding to the point where the users are crowded very close
+The decay starts from near 100\% corresponding to the point where the users are crowded very close
 together (user transmission radius approximately equal to grid size) and swiftly decays as
 the grid size is increased.
 This result means that as separation distance increases for a small population, there
@@ -45,7 +65,7 @@ The results become very erratic when the area is very large because so few messa
 are received at that point.
 The effect tails off as user separation increases because, even though the probability
 of success is greatly reduced, the successful paths that can be formed between users
-occur when communication is traveling between well-placed users in the communication path.
+occur when communication is traveling between closely placed users in the communication path.
 This increase in area shares the largest possible latencies overall as when a message does
 successful travel to it's intended recipient, it has been re-transmitted by participating
 users many times.
@@ -64,12 +84,12 @@ Figure \ref{fig:varradius} shows the results when the user transmission radius i
 {fig:varradius}
 
 Figure \ref{fig:varradius}a shows a logarithmic increase in successfully received packets.
-The success rate increases from 0\% near the trivial case when user radius is much less
-than the grid size and user population can support, to 100\% again near the region where
-the transmission radius approximately equals grid size.
+The success rate increases from close to 0\% near the trivial case when user radius is far smaller
+than the user density can support, to complete success again past the region where
+the transmission radius approximately equals grid size (optimal user density).
 The intuition here mirrors the intuition for the increasing grid size and produces a strong
 correlation towards increasing the transmission radius (at the expense of cellular battery life)
-when the user population and separation distance do not support normal communication.
+when the user density does not support normal communication.
 
 Figure \ref{fig:varradius}b shows a exponential decay in in latency.
 There is an asymptote that is reached near the point where user transmission radius is
@@ -88,9 +108,9 @@ Figure \ref{fig:varusers} shows the results when the user population is increase
 {fig:varusers}
 
 Figure \ref{fig:varusers}a shows an exponential decrease in successfully received packets with
-an asymptote. The asymptote appears to start around 500 users, and experiences a much smaller,
-linear decay after that. The point where the asymptote starts may correspond to a saturation in the
-number of users compared to the grid size and transmission radius. The intuition here would point to
+an asymptote. The asymptote appears to start around 500 users, and experiences a much gradual
+linear decay after that. The point where the asymptote starts corresponds to the same saturation 
+point in user density as mentioned prior. The intuition here would point to
 a ceiling on the capacity that such a system can support. This could be an artificial limit based
 on the size of the re-transmit stack allocated to each user device as well as the TTL of each message.
 If the stack where increased, more messages could be re-transmitted potentially increasing the
@@ -98,6 +118,8 @@ likelihood of success. However, as the number of users increase the amount of in
 capacity considerations might limit the effectiveness of such a solution. Increasing the TTL
 parameter would be a better solution to increasing the success rate since a message would
 logically need more hops to make it to it's destination when the area is more crowded.
+This solution would also increase the overall amount of transmissions, so a trade would need to be
+made in order to avoid reduced returns.
 
 Figure \ref{fig:varusers}b shows a exponential decrease in latency. The intuition here, when coupled
 with the success rate, suggests that the successful messages are between two users that are 
@@ -107,8 +129,8 @@ again more hops would be needed to reach destinations as the user density increa
 
 \subsection{Messaging Intensity Ratio Variation}
 Figure \ref{fig:varintensity} shows the results when the transmission intensity ratio is increased.
-Note this is the only parameter that this parameter was the only parameter modeled in simulation
-based on the overall user population, instead of characteristics of the individual users.
+Note this is the only parameter that was modeled in simulation based on the overall user population, 
+instead of characteristics about the individual users.
 
 \sidebysidefigures
 {varintensity-success-rate-graph.tex}      {Success Rate vs. Intensity Ratio}
@@ -119,14 +141,14 @@ based on the overall user population, instead of characteristics of the individu
 Figure \ref{fig:varintensity}a shows a semi-linear decrease in successfully received packets.
 The increase in intensity corresponds to a sharp and then gradual decrease in the rate of success.
 The initial sharp decrease corresponds to the area before saturating the same threshold of
-user re-transmissions vs. user density as varying the number of users does. However, the intuition
+user density. However, the intuition
 for the more gradual decrease after that point suggests that as the intensity increases, there
 is a higher likelihood that the messaging is occurring between users that are closer together.
 This corresponds to figure \ref{fig:varintensity}b, which shows a steep linear decrease in latency.
-Reviewing these two graphs in parallel suggests this intuition is correct, in that an increasing
+Reviewing these two graphs in parallel suggests this intuition is correct, in that an increase
 in the amount of communication overall increases the load on the system, and reduces the effective
 range of messaging between two users. Similar to the user density increase, the solution here
 would be to increase the TTL of the messaging. However, with this increase in the liveness of
-individual messages coupled with the overall increase in the number of messages, there may be an
-overall limit in the capacity of this system to deliver messages even with the increased liveness
-due to increased interference.
+individual messages coupled with the overall increase in the number of messages, there may exist
+a structural limit in the capacity of this system to deliver messages even with the increased 
+liveness due because of interference.
