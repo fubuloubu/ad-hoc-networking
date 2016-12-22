@@ -1,4 +1,4 @@
-# Ad-Hoc Networking Paper
+# Properties of Ad-Hoc Networks
 Explore the considerations of number of end users to ad-hoc networking effectiveness
 
 # Instructions
