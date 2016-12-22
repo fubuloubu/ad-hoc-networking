@@ -17,6 +17,18 @@
   linkcolor  = black
 }
 
+%% Titled appendices
+\usepackage[titletoc,page]{appendix}
+
+%% Bibliography
+\usepackage[english]{babel}
+%TODO: Urls exceed page
+\newcommand{\makebibliography}[1]{%
+    \small
+    \bibliographystyle{plain}
+    \bibliography{#1}
+}
+
 %% Lists
 \usepackage[shortlabels]{enumitem}
 \input{format/fullwidth.tex}
@@ -35,15 +47,3 @@
 
 %% Patches (because this distro has an old version of LaTeX
 \usepackage{fixltx2e}
-
-%% Titled appendices
-\usepackage[titletoc,page]{appendix}
-
-%% Make Bibliography an Appendix
-\usepackage[english]{babel}
-\addto\captionsenglish{\renewcommand{\bibname}{References}}
-\makeatletter
-\newcommand*\bib@heading{%
-    \chapter{\bibname}%
-    \@mkboth{\MakeMarkcase{\bibname}}{\MakeMarkcase{\bibname}}}%
-\makeatother
