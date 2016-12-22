@@ -1,5 +1,5 @@
 # Properties of Ad-Hoc Networks
-Explore the considerations of number of end users to ad-hoc networking effectiveness
+Explore the effects of various properties on effectiveness of ad-hoc networks
 
 # Instructions
 Review Documentation in *documentation* directory
